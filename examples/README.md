@@ -1,8 +1,8 @@
-# privacy_controller
+# privacy control application
 
-Repository for the privacy awareness and control.
+Repository to test the privacy constrol system
 
-This is an application used to test the privacy awareness and control system. It implements the use case of a fair where the Brain-IoT solution is used to propagate the localization events produced by wearable devices assigned to the visitors to a security service and to several services immplemented by the projects present in the stands. Thanks to the use of the privacy awareness and control system of BRAIN-IoT such events are sent only to the services that are compliant with the policies set by the users.
+This is an application used to test the privacy control system. It implements the use case of a fair where the Brain-IoT solution is used to propagate the localization events produced by wearable devices assigned to the visitors to a security service and to several services immplemented by the projects present in the stands. Thanks to the use of the privacy control system of BRAIN-IoT such events are sent only to the services that are compliant with the policies set by the users.
  
 The application is composed by the following modules:
 - edge.node: an edge node used to receive events from a set of UWB devices of type DECAWAVE, through MQTT events.
