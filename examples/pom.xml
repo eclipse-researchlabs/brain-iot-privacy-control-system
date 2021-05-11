@@ -307,7 +307,6 @@ Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
 		<module>client.api</module>
 		<module>edge-node</module>
 		<module>localization.service</module>
-		<module>cpswarm.service</module>
 		<module>autopilot.service</module>
 		<module>monica.service</module>
 		<module>iof2020.service</module>
