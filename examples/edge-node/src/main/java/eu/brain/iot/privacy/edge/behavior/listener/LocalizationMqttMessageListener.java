@@ -95,8 +95,7 @@ public class LocalizationMqttMessageListener implements MqttCallback {
 			Matcher matcher = pattern.matcher(topic);
 			matcher.find();
 			event.deviceId=matcher.group().substring(5,matcher.group().length()-8);
-			//event.token = clientPrivacy.getToken(event.deviceId);
-			event.token = "sss";
+			event.token = clientPrivacy.getToken(event.deviceId);
 			if(event.token==null) {
 				System.out.println("Privacy token not available. Event discarded");
 				return;
@@ -106,7 +105,7 @@ public class LocalizationMqttMessageListener implements MqttCallback {
 			event.positionHeight = Double.parseDouble(height);
 			event.quality = obj.getPosition().getQuality();
 			event.superFrameName = obj.getSuperFrameNumber();
-			//eventBus.deliver(event);
+			eventBus.deliver(event);
 			System.out.println("Edge Node Behavior: One event with token " + event.token +" sent");
 		}
 	}
