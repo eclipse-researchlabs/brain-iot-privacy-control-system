@@ -20,24 +20,4 @@ index: target/index.xml;name="app"
 	bnd.identity;id='eu.brain.iot.privacy.cpswarm.service.edge.node'
 -ignore-standalone: ${index}
 -runbundles: \
-	com.paremus.brain.iot.message.integrity.api;version='[0.0.1,0.0.2)',\
-	com.paremus.brain.iot.message.integrity.insecure.impl;version='[0.0.1,0.0.2)',\
-	org.apache.felix.scr;version='[2.1.10,2.1.11)',\
-	com.fasterxml.jackson.core.jackson-annotations;version='[2.12.1,2.12.2)',\
-	com.fasterxml.jackson.core.jackson-core;version='[2.12.3,2.12.4)',\
-	com.fasterxml.jackson.core.jackson-databind;version='[2.12.3,2.12.4)',\
-	com.paremus.brain.iot.eventing.api;version='[0.0.1,0.0.2)',\
-	com.paremus.brain.iot.eventing.impl;version='[0.0.1,0.0.2)',\
-	eu.brain.iot.privacy.brainpep.client;version='[0.0.1,0.0.2)',\
-	org.osgi.util.function;version='[1.1.0,1.1.1)',\
-	org.osgi.util.promise;version='[1.1.0,1.1.1)',\
-	org.osgi.util.pushstream;version='[1.0.0,1.0.1)',\
-	eu.brain.iot.privacy.edge-node;version='[0.0.2,0.0.3)',\
-	org.eclipse.paho.client.mqttv3;version='[1.2.5,1.2.6)',\
-	eu.brain.iot.privacy.client.api;version='[0.0.2,0.0.3)',\
-	eu.brain.iot.privacy.iof2020.service.edge.node;version='[0.0.1,0.0.2)',\
-	eu.brain.iot.privacy.activage.service.edge.node;version='[0.0.1,0.0.2)',\
-	eu.brain.iot.privacy.autopilot.service.edge.node;version='[0.0.1,0.0.2)',\
-	eu.brain.iot.privacy.localization.service;version='[0.0.2,0.0.3)',\
-	eu.brain.iot.privacy.monica.service.edge.node;version='[0.0.1,0.0.2)',\
-	eu.brain.iot.privacy.cpswarm.service.edge.node;version='[0.0.1,0.0.2)'
+	com.fasterxml.jackson.core.jackson-annotations;version='[2.12.1,2.12.2)', com.fasterxml.jackson.core.jackson-core;version='[2.12.3,2.12.4)', com.fasterxml.jackson.core.jackson-databind;version='[2.12.3,2.12.4)', com.paremus.brain.iot.eventing.api;version='[0.0.1,0.0.2)', com.paremus.brain.iot.eventing.impl;version='[0.0.1,0.0.2)', com.paremus.brain.iot.message.integrity.api;version='[0.0.1,0.0.2)', com.paremus.brain.iot.message.integrity.insecure.impl;version='[0.0.1,0.0.2)', eu.brain.iot.privacy.activage.service.edge.node;version='[0.0.1,0.0.2)', eu.brain.iot.privacy.autopilot.service.edge.node;version='[0.0.1,0.0.2)', eu.brain.iot.privacy.brainpep.client;version='[0.0.1,0.0.2)', eu.brain.iot.privacy.client.api;version='[0.0.2,0.0.3)', eu.brain.iot.privacy.cpswarm.service.edge.node;version='[0.0.1,0.0.2)', eu.brain.iot.privacy.edge-node;version='[0.0.2,0.0.3)', eu.brain.iot.privacy.iof2020.service.edge.node;version='[0.0.1,0.0.2)', eu.brain.iot.privacy.localization.service;version='[0.0.2,0.0.3)', eu.brain.iot.privacy.monica.service.edge.node;version='[0.0.1,0.0.2)', org.apache.felix.scr;version='[2.1.10,2.1.11)', org.eclipse.paho.client.mqttv3;version='[1.2.5,1.2.6)', org.osgi.util.function;version='[1.1.0,1.1.1)', org.osgi.util.promise;version='[1.1.0,1.1.1)', org.osgi.util.pushstream;version='[1.0.0,1.0.1)'

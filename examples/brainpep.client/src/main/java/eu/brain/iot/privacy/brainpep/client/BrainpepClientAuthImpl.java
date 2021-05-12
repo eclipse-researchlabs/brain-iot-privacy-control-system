@@ -25,7 +25,8 @@ import eu.brain.iot.privacy.pojo.ServiceSpec;
 @Component(immediate=true)
 public class BrainpepClientAuthImpl implements PrivacyClient{
 	private static final String USER_AGENT = "Mozilla/5.0";
-	
+	private static final String DEVICE_API = "https://ipt-services.polito.it/brainpep/api/v1/gateway/device/";
+	private static final String SERVICES_API = "https://ipt-services.polito.it/brainpep/api/v1/gateway/filter";
 	
 	@Activate
 	public void start(BundleContext context){
@@ -37,13 +38,13 @@ public class BrainpepClientAuthImpl implements PrivacyClient{
 	public String getToken(String ID) {
 		URL url;
 		try {
-			url = new URL ("https://ipt-services.polito.it/brainpep/api/v1/gateway/device/"+ID);
+			url = new URL (DEVICE_API+ID);
 
 			HttpURLConnection con = (HttpURLConnection)url.openConnection();
 			con.setRequestMethod("GET");
 			con.setRequestProperty("User-Agent", USER_AGENT);
 			int responseCode = con.getResponseCode();
-			System.out.println("GET Response Code :: " + responseCode +" to request: https://ipt-services.polito.it/brainpep//api/v1/device/"+ID);
+			System.out.println("GET Response Code :: " + responseCode +" to request: "+DEVICE_API+ID);
 			if (responseCode == HttpURLConnection.HTTP_OK) { // success
 				BufferedReader in = new BufferedReader(new InputStreamReader(
 						con.getInputStream()));
@@ -81,7 +82,7 @@ public class BrainpepClientAuthImpl implements PrivacyClient{
 	public List<ServiceSpec> filter(Map<String, Object> eventData, List<String> servicesID) {
 		URL url;
 		try {
-			url = new URL ("https://ipt-services.polito.it/brainpep/api/v1/gateway/filter");
+			url = new URL (SERVICES_API);
 
 			HttpURLConnection con = (HttpURLConnection)url.openConnection();
 			con.setRequestMethod("POST");
@@ -101,12 +102,12 @@ public class BrainpepClientAuthImpl implements PrivacyClient{
 			String jsonInputString = "{\"service_list\": "
 					+ jsonServicesID
 					+ ", \"sign_device\":\""+eventData.get("token")+"\"}";
-			System.out.println(jsonInputString);
+			
 			try(OutputStream os = con.getOutputStream()) {
 				byte[] input = jsonInputString.getBytes("utf-8");
 				os.write(input, 0, input.length);			
 			}
-
+			
 			try(BufferedReader br = new BufferedReader(
 					new InputStreamReader(con.getInputStream(), "utf-8"))) {
 				StringBuilder response = new StringBuilder();
@@ -116,7 +117,7 @@ public class BrainpepClientAuthImpl implements PrivacyClient{
 				}
 				ObjectMapper mapper = new ObjectMapper();
 				ServiceSpec[] responseJson = mapper.readValue(response.toString(), ServiceSpec[].class);
-				
+				System.out.println("List of available services: "+Arrays.toString(responseJson));
 				return Arrays.asList(responseJson);
 			}
 

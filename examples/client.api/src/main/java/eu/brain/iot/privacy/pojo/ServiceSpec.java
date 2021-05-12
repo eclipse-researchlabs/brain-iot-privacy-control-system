@@ -19,7 +19,7 @@ public class ServiceSpec {
 
 	@JsonProperty("name")
 	private String name;
-	@JsonProperty("scope_list")
+	@JsonProperty("resource_scopes")
 	private List<String> scopeList = null;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -34,12 +34,12 @@ public class ServiceSpec {
 		this.name = name;
 	}
 
-	@JsonProperty("scope_list")
+	@JsonProperty("resource_scopes")
 	public List<String> getScopeList() {
 		return scopeList;
 	}
 
-	@JsonProperty("scope_list")
+	@JsonProperty("resource_scopes")
 	public void setScopeList(List<String> scopeList) {
 		this.scopeList = scopeList;
 	}
@@ -54,4 +54,9 @@ public class ServiceSpec {
 		this.additionalProperties.put(name, value);
 	}
 
+	
+	@Override
+	public String toString() {
+		return this.name;
+	}
 }
