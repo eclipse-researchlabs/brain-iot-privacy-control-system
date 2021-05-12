@@ -94,7 +94,6 @@ public class EdgeNodeBehavior implements SmartBehaviour<BrainIoTEvent>{
 
 				// set the clean session parameters
 				connectionOptions.setCleanSession(true);
-				
 				connectionOptions.setPassword(password.toCharArray());
 				connectionOptions.setUserName(user);
 				
@@ -107,7 +106,7 @@ public class EdgeNodeBehavior implements SmartBehaviour<BrainIoTEvent>{
 						Thread.sleep(1000);
 					}
 
-					clientMQTT.setCallback(new LocalizationMqttMessageListener(eventBus, client));
+					clientMQTT.setCallback(new LocalizationMqttMessageListener(eventBus, client, clientMQTT, broker, persistence, connectionOptions));
 					clientMQTT.subscribe("dwm/node/+/uplink/location");
 				} catch (MqttException e1) {
 					e1.printStackTrace();

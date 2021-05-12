@@ -2,12 +2,20 @@ package eu.brain.iot.privacy.edge.behavior.listener;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.MqttSecurityException;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,15 +33,26 @@ public class LocalizationMqttMessageListener implements MqttCallback {
 
 	private Object SEMAPHORE = new Object();
 	private EventBus eventBus = null;
-	private PrivacyClient client = null;
+	private PrivacyClient clientPrivacy = null;
 	private Pattern pattern = null;
+	private MqttClient clientMQTT = null;
+	private String broker = null;
+	private MemoryPersistence persistence = null;
+	private MqttConnectOptions options = null;
 	
-	
-	public LocalizationMqttMessageListener(EventBus eventBus, PrivacyClient client) {
+	public LocalizationMqttMessageListener(final EventBus eventBus, 
+			final PrivacyClient clientPrivacy, 
+			final MqttClient clientMQTT, 
+			final String broker, 
+			final MemoryPersistence persistence,
+			final MqttConnectOptions options) {
 		this.eventBus = eventBus;
-		this.client = client;
+		this.clientPrivacy = clientPrivacy;
+		this.clientMQTT = clientMQTT;
 		pattern = Pattern.compile("node/(.*)/");
-		
+		this.broker = broker;
+		this.persistence = persistence;
+		this.options = options;
 	}
 	
 	@Override
@@ -76,7 +95,8 @@ public class LocalizationMqttMessageListener implements MqttCallback {
 			Matcher matcher = pattern.matcher(topic);
 			matcher.find();
 			event.deviceId=matcher.group().substring(5,matcher.group().length()-8);
-			event.token = client.getToken(event.deviceId);
+			//event.token = clientPrivacy.getToken(event.deviceId);
+			event.token = "sss";
 			if(event.token==null) {
 				System.out.println("Privacy token not available. Event discarded");
 				return;
@@ -86,20 +106,40 @@ public class LocalizationMqttMessageListener implements MqttCallback {
 			event.positionHeight = Double.parseDouble(height);
 			event.quality = obj.getPosition().getQuality();
 			event.superFrameName = obj.getSuperFrameNumber();
-			eventBus.deliver(event);
+			//eventBus.deliver(event);
 			System.out.println("Edge Node Behavior: One event with token " + event.token +" sent");
 		}
 	}
 
 	@Override
 	public void connectionLost(Throwable cause) {
-		// TODO Auto-generated method stub
-		
+		System.out.print("MQTT Connection lost...reconnecting");
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					clientMQTT.close();
+					do{
+						
+					} while (clientMQTT.isConnected());
+					clientMQTT = null;
+					persistence = new MemoryPersistence();
+					clientMQTT = new MqttClient(broker, UUID.randomUUID().toString(), persistence);
+					clientMQTT.connect(options);
+					clientMQTT.setCallback(new LocalizationMqttMessageListener(eventBus, clientPrivacy, clientMQTT, broker, persistence, options));
+					clientMQTT.subscribe("dwm/node/+/uplink/location");
+				} catch (MqttSecurityException e) {
+					e.printStackTrace();
+				} catch (MqttException e) {
+					e.printStackTrace();
+				}
+			}
+		}, 2000);
 	}
 
 	@Override
 	public void deliveryComplete(IMqttDeliveryToken token) {
 		// TODO Auto-generated method stub
-		
 	}	
 }
