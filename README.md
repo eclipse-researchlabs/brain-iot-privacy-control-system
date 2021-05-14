@@ -1,5 +1,4 @@
-# brain-iot-privacy-control-system
-
+# Brain-IoT Privacy Control System
 Solution for privacy control, mainly based on popular paradigms in the field of privacy protection in distributed environments, i.e., Sticky policies and Privacy as a service. This framework has the main objective to establish how data must be treated, directly attaching such rules to the corresponding data. Sticky policies are able to regulate how data can be accessed and used throughout their entire life cycle, allowing access control decisions and policy enforcement to be carried out in a distributed way. Such an approach has been introduced for enforcing data protection
 Specifically, sticky policies regulate the use of the associated data, and can define the following aspects:
 - The data owner;
