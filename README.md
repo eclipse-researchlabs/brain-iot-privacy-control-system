@@ -15,6 +15,9 @@ Main component used for deciding and enforcing whether a data consumer service i
 
 ## Brain-IoT Privacy Dashboard
 
-Web-based user interface which serves as interface for the data owners to set the policies associated to their own data. It also serves as an interface for the service providers to set the data access requirements needed to provide the service. The policies defined by Data Owners and Data Consumers through the Privacy Dashboard are stored to the Authorization Server through the BRAIN-IoT PEP (please refer to the related [readme](https://github.com/eclipse-researchlabs/brain-iot-privacy-control-system/blob/main/privacy_dashboard/README.md) for more details).
+Web-based user interface which serves as interface for the data owners to set the policies associated to their own data. It also serves as an interface for the service providers to set the data access requirements needed to provide the service. 
+The policies defined by Data Owners and Data Consumers through the Privacy Dashboard are stored to the Authorization Server through the BRAIN-IoT PEP (please refer to the related  [readme](https://github.com/eclipse-researchlabs/brain-iot-privacy-control-dashboard) for more details).
 
-The repository includes also an example folder that contains the application used to test the Privacy Control System, in the use case defined in collaboration with the MONICA EU project. (please refer to the related [readme](https://github.com/eclipse-researchlabs/brain-iot-privacy-control-dashboard))
+
+## Examples
+The repository includes an example folder that contains the application used to test the Privacy Control System, in the use case defined in collaboration with the MONICA EU project. (please refer to the related [readme](https://github.com/eclipse-researchlabs/brain-iot-privacy-control-system/tree/main/examples)).
