@@ -9,7 +9,7 @@ Specifically, sticky policies regulate the use of the associated data, and can d
 
 The two main components of the framework are the following:
 
-## Brain-IoT PeP
+## Brain-IoT PEP
 
 Main component used for deciding and enforcing whether a data consumer service is authorized to access the data in transit.(please refer to the related [readme](https://github.com/eclipse-researchlabs/brain-iot-privacy-control-system-api) for more details).
 
